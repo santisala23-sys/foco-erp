@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabaseClient as supabase } from '../../lib/db'
-import { Check, X, UserSearchlert, Phone, AlertCircle } from 'lucide-react'
+import { Check, X, UserSearch, ShieldAlert, Phone, AlertCircle } from 'lucide-react'
 
 export default function DashboardAprobaciones() {
   const [pendientes, setPendientes] = useState([])
