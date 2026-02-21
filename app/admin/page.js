@@ -50,6 +50,20 @@ export default function AdminPanel() {
         .select('*', { count: 'exact', head: true })
         .lt('cantidad', 5);
 
+// ... dentro de fetchStats()
+// 4. Contar Solicitudes de Socios Pendientes
+const { count: solicitudesPendientes } = await supabaseClient
+  .from('socios')
+  .select('*', { count: 'exact', head: true })
+  .eq('estado', 'pendiente');
+
+setStats(prev => ({
+  ...prev,
+  pendientesSocios: solicitudesPendientes || 0
+}));
+// ...
+
+
       // 3. Contar pedidos pendientes de aprobación
       const { count: pedidosPendientes } = await supabaseClient
         .from('pedidos')
@@ -69,12 +83,16 @@ export default function AdminPanel() {
   }, [router]);
 
   const menuAdmin = [
-    { title: 'Gestión de Profesores', icon: <ShieldCheck />, desc: 'Asignar divisiones y crear cuentas', link: '/admin/profes' },
-    { title: 'Pedidos de Materiales', icon: <Bell className={stats.pendientes > 0 ? "text-red-400 animate-pulse" : ""} />, desc: 'Aprobar entregas de stock', link: '/admin/pedidos' },
-    { title: 'Inventario Global', icon: <Package />, desc: 'Control de stock y compras', link: '/materiales' },
-    { title: 'Listado de Anotados', icon: <Users />, desc: 'Ver todos los socios activos', link: '/socios' },
-  ];
-
+  { 
+    title: 'Aprobaciones de Socios', 
+    icon: <UserSearch className={stats.pendientesSocios > 0 ? "text-orange-400 animate-pulse" : ""} />, 
+    desc: `Hay ${stats.pendientesSocios} solicitudes nuevas`, 
+    link: '/admin/aprobaciones' 
+  },
+  { title: 'Gestión de Profesores', icon: <ShieldCheck />, desc: 'Asignar divisiones y crear cuentas', link: '/admin/profes' },
+  { title: 'Inventario Global', icon: <Package />, desc: 'Control de stock y compras', link: '/materiales' },
+  { title: 'Reportes de Asistencia', icon: <ClipboardList />, desc: 'Ver quién faltó a cada clase', link: '/dashboards' },
+];
   if (!autorizado) return <div className="p-10 text-center">Verificando credenciales de Admin...</div>;
 
   return (
