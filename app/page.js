@@ -1,12 +1,26 @@
+'use client'; // Esta línea es sagrada, siempre arriba de todo
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Users, Trophy, BarChart3, Package, ArrowRight } from 'lucide-react';
 
 export default function Home() {
+  const router = useRouter();
+
+  // "El Portero": Si no hay sesión, manda al profe al Login
+  useEffect(() => {
+    const isAuth = localStorage.getItem('foco_auth');
+    if (!isAuth) {
+      router.push('/login');
+    }
+  }, [router]);
+
   const accesosRapidos = [
     {
       titulo: 'Tomar Asistencia',
       descripcion: 'Cargar presentes del día',
-      link: '/operaciones', // Ajustar si la subvista de asistencia tiene otra ruta
+      link: '/operaciones',
       icon: <Users className="w-8 h-8 text-emerald-500" />,
       color: 'hover:border-emerald-500'
     },
@@ -36,7 +50,7 @@ export default function Home() {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <header className="mb-10 text-center md:text-left">
-        <h1 className="text-3xl font-bold text-slate-900">¡Hola, Profe!</h1>
+        <h1 className="text-3xl font-bold text-slate-900">¡Hola, Profe! 👋</h1>
         <p className="text-slate-500 mt-2">¿Qué vamos a registrar hoy en Foco?</p>
       </header>
 
