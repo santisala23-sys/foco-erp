@@ -88,6 +88,12 @@ setStats(prev => ({
     desc: `Hay ${stats.pendientesSocios} solicitudes nuevas`, 
     link: '/admin/aprobaciones' 
   },
+  { 
+    title: 'Asignar a Equipos', 
+    icon: <Users className="text-blue-400" />, 
+    desc: 'Ubicá a los jugadores aprobados en su categoría.', 
+    link: '/admin/asignar-equipos' 
+  },
   { title: 'Gestión de Profesores', icon: <ShieldCheck />, desc: 'Asignar divisiones y crear cuentas', link: '/admin/profes' },
   { title: 'Inventario Global', icon: <Package />, desc: 'Control de stock y compras', link: '/materiales' },
   { title: 'Reportes de Asistencia', icon: <ClipboardList />, desc: 'Ver quién faltó a cada clase', link: '/dashboards' },
