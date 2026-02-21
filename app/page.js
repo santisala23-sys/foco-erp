@@ -85,9 +85,10 @@ export default function Home() {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <header className="mb-10 text-center md:text-left">
-        {/* Aquí está el cambio del saludo */}
-        <h1 className="text-3xl font-bold text-slate-900">Hola {nombreUsuario}</h1>
-        <p className="text-slate-500 mt-2">¿Qué vamos a registrar hoy en Foco?</p>
+        {/* Cambiamos text-slate-900 por text-white */}
+        <h1 className="text-3xl font-bold text-white">Hola {nombreUsuario}</h1>
+        {/* Cambiamos text-slate-500 por text-slate-300 para que resalte más */}
+        <p className="text-slate-300 mt-2">¿Qué vamos a registrar hoy en Foco?</p>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
