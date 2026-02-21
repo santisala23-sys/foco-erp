@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { supabaseClient } from '@/lib/db'
+import { supabaseClient } from '../lib/db'
 import { Users, Package, CalendarCheck, BarChart3, Settings, Home, Activity, Menu, X, LogOut, ShieldAlert } from 'lucide-react'
 
 export default function Sidebar() {
