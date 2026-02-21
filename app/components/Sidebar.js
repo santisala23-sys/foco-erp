@@ -1,17 +1,37 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react' // Agregamos useEffect
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { supabaseClient } from '../lib/db'
+import { supabaseClient } from '../lib/db' // Usamos tu ruta original que funciona
 import { Users, Package, CalendarCheck, BarChart3, Settings, Home, Activity, Menu, X, LogOut, ShieldAlert } from 'lucide-react'
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [rolAviso, setRolAviso] = useState(null) // Nuevo estado para el rol
   const router = useRouter()
 
   const toggleSidebar = () => setIsOpen(!isOpen)
   const closeSidebar = () => setIsOpen(false)
+
+  // Buscamos el rol del usuario logueado
+  useEffect(() => {
+    async function obtenerRol() {
+      const { data: { user } } = await supabaseClient.auth.getUser();
+      if (user) {
+        const { data: perfil } = await supabaseClient
+          .from('perfiles')
+          .select('rol')
+          .eq('id', user.id)
+          .single();
+        
+        if (perfil) {
+          setRolAviso(perfil.rol);
+        }
+      }
+    }
+    obtenerRol();
+  }, []);
 
   // Función para cerrar sesión de verdad
   const handleLogout = async () => {
@@ -64,9 +84,7 @@ export default function Sidebar() {
           <Link href="/" onClick={closeSidebar} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-white transition">
             <Home size={20} /> Inicio
           </Link>
-          <Link href="/socios" onClick={closeSidebar} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-white transition">
-            <Users size={20} /> Socios
-          </Link>
+          
           <Link href="/operaciones" onClick={closeSidebar} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-white transition">
             <CalendarCheck size={20} /> Operaciones
           </Link>
@@ -77,10 +95,20 @@ export default function Sidebar() {
             <BarChart3 size={20} /> Dashboards
           </Link>
 
-          {/* Acceso a Admin (Podés ocultarlo con lógica de rol si querés) */}
-          <Link href="/admin" onClick={closeSidebar} className="flex items-center gap-3 p-3 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white transition mt-4">
-            <ShieldAlert size={20} /> Panel de Admin
-          </Link>
+          {/* ESTO SOLO LO VE EL ADMIN */}
+          {rolAviso === 'admin' && (
+            <>
+              <div className="pt-4 mt-4 border-t border-slate-800">
+                <p className="px-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Administración</p>
+                <Link href="/socios" onClick={closeSidebar} className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                  <Users size={20} /> Socios
+                </Link>
+                <Link href="/admin" onClick={closeSidebar} className="flex items-center gap-3 p-3 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white transition mt-2">
+                  <ShieldAlert size={20} /> Panel de Admin
+                </Link>
+              </div>
+            </>
+          )}
         </nav>
 
         {/* Sección de Salida */}
