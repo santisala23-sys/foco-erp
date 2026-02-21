@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { supabaseClient as supabase } from '@/lib/db'; // Usamos el alias que ya sabemos que funciona
+import { supabaseClient as supabase } from './lib/db';
 import { Users, Package, CalendarCheck, BarChart3, Activity } from 'lucide-react';
 
 export default function Home() {
