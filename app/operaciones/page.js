@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabaseClient as supabase } from '../lib/db'
 import { Users, Save, Calendar, Trophy, Swords, Target } from 'lucide-react'
 
 export default function OperacionesCenter() {

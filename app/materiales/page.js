@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabaseClient as supabase } from '../lib/db'
 import { Package, PlusCircle, ClipboardList, CheckCircle2, AlertCircle, ListTodo, CheckSquare, ShoppingCart } from 'lucide-react'
 
 export default function GestionMateriales() {

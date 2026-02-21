@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabaseClient as supabase } from '../lib/db'
 import { BarChart3, TrendingUp, Users, AlertCircle } from 'lucide-react'
 
 export default function DashboardGeneral() {
