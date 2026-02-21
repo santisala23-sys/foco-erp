@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <header className="mb-10 text-center md:text-left">
-        <h1 className="text-3xl font-bold text-slate-900">¡Hola, Profe! 👋</h1>
+        <h1 className="text-3xl font-bold text-slate-900">¡Hola, Profe! /h1>
         <p className="text-slate-500 mt-2">¿Qué vamos a registrar hoy en Foco?</p>
       </header>
 
