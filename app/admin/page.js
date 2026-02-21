@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabaseClient } from '../lib/db';
-import { Users, ShieldCheck, Package, ClipboardList, UserPlus, Bell } from 'lucide-react';
-import { Users, ShieldCheck, Package, ClipboardList, UserPlus, UserSearch } from 'lucide-react';
+import { Users, ShieldCheck, Package, ClipboardList, UserPlus, Bell, UserSearch } from 'lucide-react';
 export default function AdminPanel() {
   const router = useRouter();
   const [autorizado, setAutorizado] = useState(false);
