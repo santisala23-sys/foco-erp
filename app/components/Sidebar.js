@@ -1,39 +1,43 @@
 "use client"
 
-import { useState, useEffect } from 'react' // Agregamos useEffect
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { supabaseClient } from '../lib/db' // Usamos tu ruta original que funciona
+import { supabaseClient } from '../lib/db'
 import { Users, Package, CalendarCheck, BarChart3, Settings, Home, Activity, Menu, X, LogOut, ShieldAlert } from 'lucide-react'
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [rolAviso, setRolAviso] = useState(null) // Nuevo estado para el rol
+  const [rolAviso, setRolAviso] = useState(null)
   const router = useRouter()
 
   const toggleSidebar = () => setIsOpen(!isOpen)
   const closeSidebar = () => setIsOpen(false)
 
-  // Buscamos el rol del usuario logueado
+  // Buscamos el rol del usuario logueado a prueba de errores
   useEffect(() => {
     async function obtenerRol() {
       const { data: { user } } = await supabaseClient.auth.getUser();
       if (user) {
-        const { data: perfil } = await supabaseClient
+        const { data: perfil, error } = await supabaseClient
           .from('perfiles')
           .select('rol')
           .eq('id', user.id)
           .single();
         
-        if (perfil) {
-          setRolAviso(perfil.rol);
+        // Lo imprimimos en consola por si falla
+        console.log("Rol detectado en Sidebar:", perfil?.rol);
+
+        if (perfil && perfil.rol) {
+          // trim() elimina espacios fantasma ('admin ' -> 'admin')
+          // toLowerCase() unifica mayúsculas ('Admin' -> 'admin')
+          setRolAviso(perfil.rol.trim().toLowerCase());
         }
       }
     }
     obtenerRol();
   }, []);
 
-  // Función para cerrar sesión de verdad
   const handleLogout = async () => {
     await supabaseClient.auth.signOut();
     localStorage.removeItem('foco_auth'); 
