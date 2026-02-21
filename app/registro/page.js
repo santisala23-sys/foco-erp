@@ -178,4 +178,48 @@ export default function RegistroPublico() {
               
               <div>
                 <label className="block text-sm font-bold text-slate-700 mb-1">Número de Afiliado</label>
-                <input type="text" name="numero_afiliado" value={formData.numero_afiliado} onChange={handleChange
+                <input type="text" name="numero_afiliado" value={formData.numero_afiliado} onChange={handleChange} 
+                  className="w-full border border-slate-300 rounded-xl p-3 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-rose-500 outline-none transition-all" />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-bold text-slate-700 mb-1">Alergias o Condiciones Médicas a tener en cuenta</label>
+                <textarea name="alergias" rows="2" value={formData.alergias} onChange={handleChange} placeholder="Ej: Asma, alergia a la penicilina, diabetes. (Dejar en blanco si no tiene)"
+                  className="w-full border border-slate-300 rounded-xl p-3 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-rose-500 outline-none transition-all"></textarea>
+              </div>
+
+              <div className="md:col-span-2 bg-slate-50 p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-1">Tutor / Contacto de Emergencia *</label>
+                  <input type="text" name="contacto_emergencia" required value={formData.contacto_emergencia} onChange={handleChange} placeholder="Nombre completo del familiar"
+                    className="w-full border border-slate-300 rounded-xl p-3 bg-white text-slate-900 focus:ring-2 focus:ring-rose-500 outline-none transition-all" />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-1">Teléfono de Emergencia *</label>
+                  <input type="text" name="telefono_emergencia" required value={formData.telefono_emergencia} onChange={handleChange} placeholder="Ej: 11-2233-4455"
+                    className="w-full border border-slate-300 rounded-xl p-3 bg-white text-slate-900 focus:ring-2 focus:ring-rose-500 outline-none transition-all" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* BOTÓN SUBMIT FLOTANTE EN MÓVIL */}
+          <div className="pt-4 pb-10">
+            <button 
+              type="submit" 
+              disabled={guardando}
+              className="w-full bg-slate-900 text-white px-8 py-5 rounded-2xl font-black text-lg hover:bg-slate-800 transition-all flex items-center justify-center gap-3 disabled:opacity-50 shadow-xl active:scale-95"
+            >
+              <Send size={24} />
+              {guardando ? 'Enviando datos...' : 'Enviar Solicitud de Inscripción'}
+            </button>
+            <p className="text-center text-xs font-medium text-slate-400 mt-4">
+              Al enviar este formulario, los datos quedan sujetos a revisión por la administración.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
