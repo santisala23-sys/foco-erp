@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabaseClient as supabase } from '@/lib/db'
+import { supabaseClient as supabase } from '../../lib/db'
 import { Users, Save, CheckSquare, Square, ArrowRight, Activity } from 'lucide-react'
 
 export default function AsignarEquipos() {
