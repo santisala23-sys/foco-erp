@@ -1,4 +1,4 @@
-import { supabase } from './lib/supabase'
+import { supabaseClient as supabase } from './lib/db'
 
 export const revalidate = 0;
 

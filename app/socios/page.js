@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabaseClient as supabase } from '../lib/db'
 import { UserPlus, Save, AlertCircle, CheckCircle2 } from 'lucide-react'
 
 export default function AltaSocios() {
