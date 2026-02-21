@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabaseClient as supabase } from '../../lib/db'
-import { Check, X, UserClock, ShieldAlert, Phone, AlertCircle } from 'lucide-react'
+import { Check, X, UserSearchlert, Phone, AlertCircle } from 'lucide-react'
 
 export default function DashboardAprobaciones() {
   const [pendientes, setPendientes] = useState([])
@@ -41,8 +41,8 @@ export default function DashboardAprobaciones() {
     <div className="p-4 md:p-8 max-w-6xl mx-auto">
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-slate-800 flex items-center gap-3">
-          <UserClock className="text-orange-500" size={32} />
-          Solicitudes de Ingreso
+         <UserSearch className="text-orange-500" size={32} />
+  Solicitudes de Ingreso
         </h1>
         <p className="text-slate-500">Aprobá o rechazá a los nuevos socios que se registraron online.</p>
       </header>
