@@ -49,10 +49,18 @@ export default function OperacionesCenter() {
     fetchDivisiones()
   }, [categoriaId])
 
-  async function cargarJugadores() {
-    const { data } = await supabase.from('socios').select('*').order('apellido')
+async function cargarJugadores() {
+    // CAMBIO ACÁ: Le agregamos el .eq('division_id', divisionId)
+    const { data } = await supabase
+      .from('socios')
+      .select('*')
+      .eq('estado', 'aprobado') // Solo los aprobados por vos
+      .eq('division_id', divisionId) // Solo los de esta división
+      .order('apellido')
+
     if (data) {
       setJugadores(data)
+
       if (vistaActiva === 'asistencia') {
         const estadoAsistencia = {}
         data.forEach(j => estadoAsistencia[j.id] = 'Presente')
